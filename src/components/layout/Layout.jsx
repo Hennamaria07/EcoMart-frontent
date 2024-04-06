@@ -17,7 +17,7 @@ const Layout = ({ children}) => {
               </Helmet>
               </HelmetProvider> */}
         <Header />
-        <main>
+        <main className='min-h-[90vh]'>
             {children}
         </main>
         <Footer />
