@@ -3,10 +3,10 @@ import Header from './Header'
 import Footer from './Footer'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 
-const Layout = ({ children, title, description, keyword, author, viewport}) => {
+const Layout = ({ children}) => {
   return (
     <div>
-        <HelmetProvider>
+        {/* <HelmetProvider>
       <Helmet>
         <meta charSet="utf-8" />
         <title>{title}</title>
@@ -15,7 +15,7 @@ const Layout = ({ children, title, description, keyword, author, viewport}) => {
             <meta name="author" content={author} />
               <meta name="viewport" content={viewport} />
               </Helmet>
-              </HelmetProvider>
+              </HelmetProvider> */}
         <Header />
         <main>
             {children}

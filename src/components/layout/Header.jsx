@@ -16,8 +16,8 @@ const Header = () => {
         document.querySelector("html").setAttribute("data-theme", localTheme);
     }, [theme])
     return (
-        <header>
-            <nav className="navbar bg-neutral text-neutral-content">
+        <header className='border-b '>
+            <nav className="navbar bg-base-100">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
