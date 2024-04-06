@@ -13,6 +13,12 @@ export default {
         xl: '5rem',
         '2xl': '6rem',
       },
+      screens: {
+        sm: '100%',    // Small screens (up to 640px wide)
+        md: '100%',    // Medium screens (up to 768px wide)
+        lg: '100%',  // Large screens (up to 1024px wide)
+        xl: '100%',  // Extra large screens (up to 1280px wide)
+      },
     },
     extend: {},
   },
