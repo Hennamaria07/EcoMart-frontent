@@ -1,10 +1,20 @@
 import React from 'react'
 import Layout from '../components/layout/Layout'
 import { Link } from 'react-router-dom'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 const NotFount = () => {
     return (
         <Layout>
+             <HelmetProvider>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Oops! Page Not Found - EcoMart</title>
+        <meta name="description" content="Lost in the wilderness of the internet? Don't worry! Navigate back to EcoMart's lush aisles. Shop sustainably. Shop smartly. Shop at EcoMart."/>
+          <meta name="keywords" content="EcoMart, e-commerce, MERN stack, sustainable shopping, online marketplace, eco-friendly products, 404 page, lost page" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              </Helmet>
+              </HelmetProvider>
             <section className='px-16 h-[60vh] md:px-40'>
                 <div className="text-sm pt-10 breadcrumbs">
                     <ul>

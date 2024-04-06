@@ -1,23 +1,12 @@
 import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 const Layout = ({ children}) => {
   return (
     <div>
-        {/* <HelmetProvider>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>{title}</title>
-        <meta name="description" content={description} />
-          <meta name="keywords" content={keyword} />
-            <meta name="author" content={author} />
-              <meta name="viewport" content={viewport} />
-              </Helmet>
-              </HelmetProvider> */}
         <Header />
-        <main className='min-h-[90vh]'>
+        <main className='min-h-[100vh] pt-[65.6px]'>
             {children}
         </main>
         <Footer />

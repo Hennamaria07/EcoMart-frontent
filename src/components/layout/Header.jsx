@@ -16,7 +16,7 @@ const Header = () => {
         document.querySelector("html").setAttribute("data-theme", localTheme);
     }, [theme])
     return (
-        <header className='border-b '>
+        <header className='border-b fixed z-10 w-full'>
             <nav className="navbar bg-base-100">
                 <div className="navbar-start">
                     <div className="dropdown">
