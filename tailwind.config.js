@@ -7,8 +7,8 @@ export default {
   theme: {
     container: {
       padding: {
-        DEFAULT: '2rem',
-        sm: '2rem',
+        DEFAULT: '1rem',
+        sm: '1rem',
         lg: '4rem',
         xl: '5rem',
         '2xl': '6rem',
