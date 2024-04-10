@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import userPhoto from '../assets/images/user.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import instance from '../axios';
 import {toast} from "react-toastify";
 
 const SignUpForm = () => {
+    const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const [formData, setFormData] = useState(null);
     const passwordCheck = watch("password");
@@ -43,6 +44,9 @@ const SignUpForm = () => {
                 const res = await instance.post('/api/v1/user/signup', formDatas, {headers: {"Content-Type": "multipart/form-data"}});
                 if(res.data.success) {
                     toast.success(res.data.message);
+                    setTimeout(()=> {
+                        navigate("/login");
+                    }, 1000)
                 }
             } catch (error) {
                 toast.error(error.response.data.message);

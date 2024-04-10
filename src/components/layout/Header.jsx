@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import {useSelector} from 'react-redux';
+import {ToastContainer, toast, Flip} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import Cookies from "js-cookie";
+import { getCurrentUser } from '../../redux/features/user/authReducer';
+import {useDispatch} from "react-redux"
 
 const Header = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
     const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light");
+    const user = useSelector(state => state.userAuth.user);
     const handleToggle = (e) => {
         if (e.target.checked) {
             setTheme("dark")
@@ -14,9 +23,31 @@ const Header = () => {
         localStorage.setItem("theme", theme);
         const localTheme = localStorage.getItem("theme");
         document.querySelector("html").setAttribute("data-theme", localTheme);
-    }, [theme])
+    }, [theme]);
+    const handleLogOut = () => {
+        Cookies.remove("accessToken");
+        dispatch(getCurrentUser({
+            user: null,
+            token: null,
+            isAuthenticated: null
+        }))
+        navigate("/login")
+    }
     return (
         <header className='border-b fixed z-10 w-full'>
+            <ToastContainer 
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition={Flip}
+                />
             <nav className="navbar bg-base-100">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -88,10 +119,10 @@ const Header = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="dropdown dropdown-end">
+                    {user ? (<div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                <img alt={user?.fullName} src={user.image?.avatar} />
                             </div>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
@@ -102,9 +133,9 @@ const Header = () => {
                                 </a>
                             </li>
                             <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
+                            <li onClick={handleLogOut}><Link to={"#"}>Logout</Link></li>
                         </ul>
-                    </div>
+                    </div>) : (<Link to={'/login'}><p>Sign in</p></Link>)}
                     <div>
                         <label className="swap swap-rotate">
                             <input type="checkbox" onClick={handleToggle} />

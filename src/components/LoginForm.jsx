@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import instance from '../axios';
-import {toast} from 'react-toastify'
+import {toast} from 'react-toastify';
+import {useDispatch} from "react-redux"
+import { getCurrentUser } from '../redux/features/user/authReducer';
 
 const LoginForm = () => {
+    const dispatch = useDispatch();
     const {register, handleSubmit, formState: { errors }} = useForm();
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const navigate = useNavigate();
@@ -21,6 +24,13 @@ const LoginForm = () => {
             }, {withCredentials: true});
             if(res.data.success) {
                 toast.success(res.data.message);
+                dispatch(getCurrentUser(
+                    {
+                        user: res.data.user,
+                        token: res.data.accessToken,
+                        isAuthenticated: res.data.isAuthenticated
+                    }
+                    ))
                 setTimeout(() => {
                     navigate("/")
                 }, 1000)

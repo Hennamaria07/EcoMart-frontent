@@ -2,10 +2,12 @@ import { useState } from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Faq, Home, Login, NotFount, Register } from './pages'
+import ProductedRouter from './utils/ProductedRouter';
+import {useSelector} from "react-redux"
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const isAuthenticated = useSelector(state => state.userAuth.isAuthenticated)
+  // console.log('isAuthenticated--------> ',isAuthenticated);
   return (
     <BrowserRouter>
      <Routes>
