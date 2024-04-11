@@ -6,12 +6,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import Cookies from "js-cookie";
 import { getCurrentUser } from '../../redux/features/user/authReducer';
 import {useDispatch} from "react-redux"
+import userPhoto from '../../assets/images/user.png';
 
 const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light");
     const user = useSelector(state => state.userAuth.user);
+    const role = useSelector(state => state.userAuth?.user?.role)
     const handleToggle = (e) => {
         if (e.target.checked) {
             setTheme("dark")
@@ -122,7 +124,7 @@ const Header = () => {
                     {user ? (<div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                <img alt={user?.fullName} src={user.image?.avatar} />
+                                <img alt={user?.fullName} src={user.image?.avatar ? user.image?.avatar : userPhoto} />
                             </div>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
@@ -132,7 +134,7 @@ const Header = () => {
                                     <span className="badge">New</span>
                                 </a>
                             </li>
-                            <li><a>Settings</a></li>
+                            {role === "admin" ? (<li><Link to={"/admin"}>Admin</Link></li>) : ""}
                             <li onClick={handleLogOut}><Link to={"#"}>Logout</Link></li>
                         </ul>
                     </div>) : (<Link to={'/login'}><p>Sign in</p></Link>)}
