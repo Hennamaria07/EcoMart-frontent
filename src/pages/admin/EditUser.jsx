@@ -1,12 +1,12 @@
 import React from 'react'
-import { AdminSideBar, Layout, UserCard } from '../../components';
+import { AdminSideBar, EditUserBreadcrumbs, EditUserForm, Layout } from '../../components';
 import {ToastContainer, Flip} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-const Users = () => {
+const EditUser = () => {
   return (
     <Layout>
-      <ToastContainer 
+         <ToastContainer 
                 position="top-center"
                 autoClose={2000}
                 hideProgressBar={false}
@@ -20,10 +20,10 @@ const Users = () => {
                 transition={Flip}
                 />
         <AdminSideBar />
-        <UserCard />
-
+        <EditUserBreadcrumbs />
+        <EditUserForm />
     </Layout>
   )
 }
 
-export default Users
+export default EditUser

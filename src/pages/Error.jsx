@@ -18,14 +18,16 @@ const NotFount = () => {
             <section className='h-[60vh] container'>
                 <div className="text-sm pt-10 breadcrumbs">
                     <ul>
-                        <li><Link>Home</Link></li>
-                        <li><Link>404 Error</Link></li>
+                        <li><Link to={'/'}>Home</Link></li>
+                        <li>404 Error</li>
                     </ul>
                 </div>
                        <div className='h-full text-center grid place-content-center'>
                        <h1 className='text-4xl sm:text-6xl font-semibold line-clamp-2'>404 Not Found</h1>
                         <p className='pt-5 pb-10'>Your visited page not found. You may go home page.</p>
+                        <Link to={'/'}>
                         <button className="btn btn-primary">Back to home page</button>
+                        </Link>
                        </div>
             </section>
         </Layout>
