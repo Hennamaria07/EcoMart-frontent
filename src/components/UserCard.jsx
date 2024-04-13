@@ -21,13 +21,6 @@ const UserCard = () => {
         }
         fetchUsers();
     }, [users]);
-    const handleDelete = async() => {
-        // try {
-        //     const res = 
-        // } catch (error) {
-            
-        // }
-    }
     return (
         <>
             <div className='container grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 pt-[58px]'>

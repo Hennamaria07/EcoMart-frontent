@@ -9,7 +9,7 @@ const AdminSideBar = () => {
             <div className="drawer-content fixed py-2">
                 {/* Page content here */}
                 <label htmlFor="my-drawer" id='open' className="btn btn-primary drawer-button">
-                    <span class="material-symbols-outlined">
+                    <span className="material-symbols-outlined">
                         menu
                     </span>Open menu</label>
             </div>

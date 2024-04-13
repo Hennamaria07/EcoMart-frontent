@@ -8,6 +8,8 @@ import Products from "./admin/Products";
 import AddProducts from "./admin/AddProducts";
 import Users from "./admin/Users";
 import EditUser from "./admin/EditUser";
+import EditProduct from "./admin/EditProduct";
+import { EditProductForm } from "../components";
 
 
-export {Home, NotFount, Login, Register, Faq, Dashboard, Products, AddProducts, Users, EditUser}
+export {Home, NotFount, Login, Register, Faq, Dashboard, Products, AddProducts, Users, EditUser, EditProduct, EditProductForm}

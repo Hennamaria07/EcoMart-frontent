@@ -1,19 +1,16 @@
 import React from 'react'
-import instance from '../axios';
-import {toast} from 'react-toastify';
 
-const DeleteModal = ({ id }) => {
-    // console.log(id);
+const DeleteProductModel = ({id}) => {
     const handleDelete = async () => {
-       try {
-         const res = await instance.delete(`/api/v1/user/delete/${id}`, {withCredentials: true});
-         if(res.data.success) {
-             toast.success(res.data.message);
-         }
-       } catch (error) {
-        toast.error(error.response.data.message)
-       }
-    }
+        try {
+          const res = await instance.delete(`/api/v1/product/delete/${id}`, {withCredentials: true});
+          if(res.data.success) {
+              toast.success(res.data.message);
+          }
+        } catch (error) {
+         toast.error(error.response.data.message)
+        }
+     }
     return (
         <section className='flex items-center'>
             {/* Open the modal using document.getElementById('ID').showModal() method */}
@@ -38,4 +35,4 @@ const DeleteModal = ({ id }) => {
     )
 }
 
-export default DeleteModal
+export default DeleteProductModel

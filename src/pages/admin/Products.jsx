@@ -1,9 +1,10 @@
 import React from 'react'
-import { AdminSideBar, Layout, ProductCard } from '../../components'
+import { AdminSideBar, Layout, ProductCard } from '../../components';
 
 const Products = () => {
   return (
     <Layout>
+        
         <AdminSideBar />
         <ProductCard />
 
