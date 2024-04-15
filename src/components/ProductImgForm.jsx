@@ -28,7 +28,7 @@ const ProductImgForm = () => {
     const onSubmit = async (data) => {
         console.log(data.images);
         const product = Array.from(data.images);
-        console.log(product)
+        // console.log(product)
         try {
             const formData = new FormData();
             product.map((img) => formData.append("product", img))
@@ -45,9 +45,6 @@ const ProductImgForm = () => {
             toast.error(error.response?.data?.message);
         }
     }
-    const handleFileChange = (e) => {
-
-    };
     return (
         <section className='container grid place-content-center'>
             <form className='grid gap-5 glass py-10 px-5 rounded-lg sm:w-[50vw] lg:w-[40vw]' onSubmit={handleSubmit(onSubmit)}>

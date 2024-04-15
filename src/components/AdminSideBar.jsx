@@ -19,7 +19,7 @@ const AdminSideBar = () => {
 
                     {/* Sidebar content here */}
                     {/* <li><Link to={'/admin/category'}>Dashboard</Link></li> */}
-                    <li><Link to={'/admin/create-category'}>Create Category</Link></li>
+                    <li><Link to={'/admin/category'}>Create Category</Link></li>
                     <li><Link to={'/admin/create-banner'}>Create Banner</Link></li>
                     <li>
                         <details>

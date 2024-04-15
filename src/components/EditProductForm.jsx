@@ -14,7 +14,7 @@ const EditProductForm = () => {
             try {
                 const res = await instance.get(`/api/v1/product/${id}`, { withCredentials: true });
                 if (res.data.success) {
-                    // console.log(res.data.product);
+                    console.log(res.data.product);
                     setCategory(res.data.product.category);
                     return {
                         name: res.data.product.name,

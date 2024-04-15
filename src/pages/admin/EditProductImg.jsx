@@ -1,6 +1,7 @@
 import React from 'react'
 import { AdminSideBar, EditProductBreadCrumbs, Layout, ProductImgForm } from '../../components';
 import {ToastContainer, Flip} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditProductImg = () => {
   return (

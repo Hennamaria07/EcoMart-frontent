@@ -1,14 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import instance from '../axios';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 
 const AddProductFrom = () => {
+    const user = useSelector(state => state.userAuth.user);
+    const navigate = useNavigate();
+    console.log('user--->',user._id)
     const {register, handleSubmit, formState: { errors }} = useForm();
-    const [categories, setCategories] = useState(null);
+    const [categories, setCategories] = useState();
     const onSubmit = async(data) => {
-        console.log(data);
+        console.log({...data, seller: user._id});
+        const productImages = Array.from(data.images);
+        try {
+            const formData = new FormData();
+            formData.append("name", data.name);
+            formData.append("description", data.description);
+            formData.append("stock", data.stock);
+            formData.append("seller", user._id);
+            formData.append("brand", data.brand);
+            formData.append("actualPrice", data.actualPrice);
+            formData.append("discountPrice", data.discountPrice);
+            formData.append("category", data.category);
+            formData.append("size", JSON.stringify(data.size));
+            productImages.forEach((image) => formData.append("product", image));
+            console.log(formData);
+
+            const res = await instance.post("/api/v1/product/add", formData, {withCredentials: true});
+            if(res.data.success) {
+                toast.success(res.data.message);
+                setTimeout(() => {
+                    navigate("/admin/products")
+                }, 1000)
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message)
+        }
     }
     useEffect(() => {
         const fetchCategories = async() => {

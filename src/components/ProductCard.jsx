@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import instance from '../axios';
 import { Link } from 'react-router-dom';
-import DeleteProductModel from './DeleteProductModel';
+import Modal from './Modal';
 
 const ProductCard = () => {
   const [products, setProducts] = useState(null);
@@ -18,15 +18,32 @@ const ProductCard = () => {
       }
     }
     fetchProducts()
-  }, [products])
+  }, [products]);
+  const handleDelete = async (id) => {
+    try {
+      const res = await instance.delete(`/api/v1/product/delete/${id}`, {withCredentials: true});
+      if(res.data.success) {
+          console.log(res.data.message);
+      }
+    } catch (error) {
+     console.log(error)
+    }
+ }
   return (
     <section className='container pt-[58px] grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 '>
       {products?.map((product) => (
-        <article className="card card-compact bg-base-100 shadow-xl">
-          <figure className='bg-white'><img src={product?.images[0]?.url} alt="Shoes" /></figure>
+        <article className="card card-compact bg-base-100 h-[30rem] shadow-xl">
+          <figure className='bg-white h-[60%] relative'>
+            <img src={product?.images[0]?.url} className='w-full h-full' alt="Shoes" />
+            <Modal 
+            productId={product._id}
+            question={'Are you sure you want to delte this product?'}
+            />
+          </figure>
           <div className="card-body">
             <h6 className='py-0'>{product.brand}</h6>
             <h2 className="card-title">{product.name}</h2>
+            <h2 className="card-title">{product._id}</h2>
             <div className='flex gap-5 items-center'>
               <span className="text-2xl font-bold ">${product.discountPrice}</span>
               <span className="text-xl font-medium line-through text-gray-500">${product.actualPrice}</span>
@@ -41,15 +58,12 @@ const ProductCard = () => {
               </div> */}
               <div className='flex gap-5'>
                 <Link className=' flex items-center text-blue-700 font-bold' to={`/admin/change-product-img/${product._id}`}>
-                  change image
+                  UPDATE IMG
                 </Link>
                 <Link className=' flex items-center' to={`/admin/edit-product/${product._id}`}>
-                  <span className="material-symbols-outlined hover:text-green-600">
+                  <span className="material-symbols-outlined hover:text-green-600" title='update product details'>
                     edit_square
                   </span>
-                </Link>
-                <Link >
-                <DeleteProductModel id={product._id}/>
                 </Link>
               </div>
             </div>
