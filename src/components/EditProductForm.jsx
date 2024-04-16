@@ -81,7 +81,7 @@ const EditProductForm = () => {
                             {...register('name', {
                                 pattern: {
                                     value: /^[a-zA-Z0-9\s_-]+$/,
-                                    message: "Invalid fullname"
+                                    message: "Invalid name"
                                 },
                                 required: "Product name is required",
                                 validate: (fieldValue) => fieldValue !== ""

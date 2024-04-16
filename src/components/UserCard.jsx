@@ -32,7 +32,7 @@ const UserCard = () => {
                                 <img src={user.image?.avatar} className='rounded-full w-full h-full'/>
                             </div>
                             </div>
-                            <h2 className="card-title">{user.fullName}</h2>
+                            <h2 className="card-title capitalize">{user.fullName}</h2>
                             <ul>
                                 <li>
                                     Role: {user.role}
@@ -50,7 +50,9 @@ const UserCard = () => {
                                     edit_square
                                 </span>
                                 </Link>
+                                <Link>
                                 <DeleteModal id={user._id}/>
+                                </Link>
                             </div>
                         </div>
                     </div>

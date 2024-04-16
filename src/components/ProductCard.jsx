@@ -31,14 +31,16 @@ const ProductCard = () => {
  }
   return (
     <section className='container pt-[58px] grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 '>
-      {products?.map((product) => (
+      {products && products.map((product) => (
         <article className="card card-compact bg-base-100 h-[30rem] shadow-xl">
           <figure className='bg-white h-[60%] relative'>
             <img src={product?.images[0]?.url} className='w-full h-full' alt="Shoes" />
+            <Link>
             <Modal 
             productId={product._id}
             question={'Are you sure you want to delte this product?'}
             />
+            </Link>
           </figure>
           <div className="card-body">
             <h6 className='py-0'>{product.brand}</h6>
