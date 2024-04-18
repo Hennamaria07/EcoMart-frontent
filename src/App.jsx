@@ -5,6 +5,7 @@ import { AddProducts, Category, Dashboard, EditProduct, EditUser, Faq, Home, Log
 import ProductedRouter from './utils/ProductedRouter';
 import { useSelector } from "react-redux"
 import EditProductImg from './pages/admin/EditProductImg';
+import Banner from './pages/admin/Banner';
 
 function App() {
   const isAuthenticated = useSelector(state => state.userAuth.isAuthenticated)
@@ -96,6 +97,14 @@ function App() {
           element={
             <ProductedRouter isAuthenticated={isAuthenticated} role={role}>
               <Category />
+            </ProductedRouter>
+          }
+        />
+        <Route
+          path='/admin/banner'
+          element={
+            <ProductedRouter isAuthenticated={isAuthenticated} role={role}>
+              <Banner />
             </ProductedRouter>
           }
         />
