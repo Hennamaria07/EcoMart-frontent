@@ -11,5 +11,5 @@ import EditUser from "./admin/EditUser";
 import EditProduct from "./admin/EditProduct";
 import { EditProductForm } from "../components";
 import Category from "./admin/Category";
-
-export {Home, NotFount, Login, Register, Faq, Dashboard, Products, AddProducts, Users, EditUser, EditProduct, EditProductForm, Category}
+import Seller from "./Seller";
+export {Home, NotFount, Login, Register, Faq, Dashboard, Products, AddProducts, Users, EditUser, EditProduct, EditProductForm, Category, Seller}

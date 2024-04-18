@@ -1,11 +1,14 @@
 import React from 'react'
-import Layout from '../components/layout/Layout'
+import { BestDeals, Carousel, HeroCategory, HeroPrdouct, Layout } from '../components'
 
 const Home = () => {
   return (
     <Layout>
         <section >
-            home
+            <Carousel />
+            <BestDeals />
+            <HeroCategory />
+            <HeroPrdouct />
         </section>
     </Layout>
   )
