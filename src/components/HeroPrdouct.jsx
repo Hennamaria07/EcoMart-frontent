@@ -44,8 +44,8 @@ const HeroPrdouct = () => {
               <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
             </div> */}
             <div className='flex gap-5'>
-            <button className="btn btn-success">view</button>
-            <button className="btn btn-success">Add to Cart</button>
+            <button className="btn btn-primary">view</button>
+            <button className="btn btn-primary">Add to Cart</button>
             </div>
           </div>
         </div>

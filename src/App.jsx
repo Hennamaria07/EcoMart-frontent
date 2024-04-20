@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { AddProducts, Category, Dashboard, EditProduct, EditUser, Faq, Home, Login, NotFount, Products, Register, Seller, Users } from './pages'
+import { AddProducts, Category, Dashboard, EditProduct, EditUser, Faq, Home, Login, NotFount, Product, ProductPreview, Products, Register, Seller, Users } from './pages'
 import ProductedRouter from './utils/ProductedRouter';
 import { useSelector } from "react-redux"
 import EditProductImg from './pages/admin/EditProductImg';
@@ -29,6 +29,14 @@ function App() {
         <Route
           path={"/seller"}
           element={<ProductedRouter isAuthenticated={isAuthenticated} role={role}><Seller /></ProductedRouter>}
+        />
+        <Route
+          path={"/product"}
+          element={<Product />}
+        />
+        <Route
+          path={"/product/:id"}
+          element={<ProductPreview />}
         />
         <Route
           path={"/faq"}

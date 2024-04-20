@@ -14,10 +14,11 @@ import HeroCategory from "./HeroCategory";
 import HeroPrdouct from "./HeroPrdouct";
 import LoginForm from "./LoginForm";
 import ProductCard from "./ProductCard";
+import ProductDetail from "./ProductDetail";
 import ProductImgForm from "./ProductImgForm";
+import Products from "./Products";
 import SignUpForm from "./SignUpForm";
 import UserCard from "./UserCard";
 import Layout from "./layout/Layout";
 
-
-export {Layout, Accordion, LoginForm, SignUpForm, AdminSideBar, UserCard, EditUserBreadcrumbs, EditUserForm, ProductCard, EditProductBreadCrumbs, EditProductForm, ProductImgForm, AddProductFrom, CategoryCard, CategoryForm, BannerCard, Carousel, BestDeals, HeroPrdouct, HeroCategory}
+export {Layout, Accordion, LoginForm, SignUpForm, AdminSideBar, UserCard, EditUserBreadcrumbs, EditUserForm, ProductCard, EditProductBreadCrumbs, EditProductForm, ProductImgForm, AddProductFrom, CategoryCard, CategoryForm, BannerCard, Carousel, BestDeals, HeroPrdouct, HeroCategory, Products, ProductDetail}

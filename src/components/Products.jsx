@@ -1,36 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import instance from '../axios';
 import { Link } from 'react-router-dom';
-import Modal from './Modal';
 
-const ProductCard = () => {
-  const [products, setProducts] = useState(null);
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await instance.get('/api/v1/product/all')
-        if (res.data.success) {
-          setProducts(res.data.product)
-          // console.log(res.data.message);
+const Products = () => {
+    const [products, setProducts] = useState(null);
+    useEffect(() => {
+      const fetchProducts = async () => {
+        try {
+          const res = await instance.get('/api/v1/product/all')
+          if (res.data.success) {
+            setProducts(res.data.product)
+            // console.log(res.data.message);
+          }
+        } catch (error) {
+          console.log(error.response?.data?.message)
         }
-      } catch (error) {
-        console.log(error.response?.data?.message)
       }
-    }
-    fetchProducts()
-  }, [products]);
+      fetchProducts();
+    //   console.log("products----->", products)
+    }, [products]);
   return (
     <section className='container pt-[58px] grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 '>
       {products && products.map((product) => (
-        <article className="card card-compact bg-base-100 h-[30rem] shadow-xl">
+        <article key={product._id} className="card card-compact bg-base-100 h-[30rem] shadow-xl">
           <figure className='bg-white h-[60%] relative'>
             <img src={product?.images[0]?.url} className='w-full h-full' alt="Shoes" />
-            <Link>
-            <Modal 
-            productId={product._id}
-            question={'Are you sure you want to delte this product?'}
-            />
-            </Link>
           </figure>
           <div className="card-body">
             <h6 className='py-0'>{product.brand}</h6>
@@ -49,14 +43,8 @@ const ProductCard = () => {
                 <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
               </div> */}
               <div className='flex gap-5'>
-                <Link className=' flex items-center text-blue-700 font-bold' to={`/admin/change-product-img/${product._id}`}>
-                  UPDATE IMG
-                </Link>
-                <Link className=' flex items-center' to={`/admin/edit-product/${product._id}`}>
-                  <span className="material-symbols-outlined hover:text-green-600" title='update product details'>
-                    edit_square
-                  </span>
-                </Link>
+              <Link to={`/product/${product._id}`}><button className="btn btn-primary">view</button></Link>
+            <button className="btn btn-primary">Add to Cart</button>
               </div>
             </div>
           </div>
@@ -67,4 +55,4 @@ const ProductCard = () => {
   )
 }
 
-export default ProductCard
+export default Products
