@@ -37,7 +37,15 @@ const LoginForm = () => {
                 }, 1000)
             }
         } catch (error) {
-            toast.error(error.response.data.message)
+            console.log("JWT expiration error:", error);
+            toast.error(error.response.data.message);
+            dispatch(getCurrentUser({
+                user: null,
+                token: null,
+                isAuthenticated: false
+            }));
+            // Navigate to login page
+            navigate('/login');
         }
     }
 

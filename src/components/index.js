@@ -4,6 +4,7 @@ import AdminSideBar from "./AdminSideBar";
 import BannerCard from "./BannerCard";
 import BestDeals from "./BestDeals";
 import Carousel from "./Carousel";
+import CartTable from "./CartTable";
 import CategoryCard from "./CategoryCard";
 import CategoryForm from "./CategoryForm";
 import EditProductBreadCrumbs from "./EditProductBreadCrumbs";
@@ -18,7 +19,8 @@ import ProductDetail from "./ProductDetail";
 import ProductImgForm from "./ProductImgForm";
 import Products from "./Products";
 import SignUpForm from "./SignUpForm";
+import Step from "./Step";
 import UserCard from "./UserCard";
 import Layout from "./layout/Layout";
 
-export {Layout, Accordion, LoginForm, SignUpForm, AdminSideBar, UserCard, EditUserBreadcrumbs, EditUserForm, ProductCard, EditProductBreadCrumbs, EditProductForm, ProductImgForm, AddProductFrom, CategoryCard, CategoryForm, BannerCard, Carousel, BestDeals, HeroPrdouct, HeroCategory, Products, ProductDetail}
+export {Layout, Accordion, LoginForm, SignUpForm, AdminSideBar, UserCard, EditUserBreadcrumbs, EditUserForm, ProductCard, EditProductBreadCrumbs, EditProductForm, ProductImgForm, AddProductFrom, CategoryCard, CategoryForm, BannerCard, Carousel, BestDeals, HeroPrdouct, HeroCategory, Products, ProductDetail, CartTable, Step}

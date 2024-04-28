@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import instance from '../axios';
-import { RadioGroup } from '@headlessui/react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import { useDispatch, useSelector } from 'react-redux';
+import { postCart, quantityDec, quantityInc } from '../redux/features/product/cartReducer';
+import { toast } from 'react-toastify';
 
 const ProductDetail = () => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const navigate = useNavigate();
     const { id } = useParams();
     const [product, setProduct] = useState();
     const [isClicked, setIsClicked] = useState(false);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-    const [quantity, setQuantity] = useState(1)
+    // const [quantity, setQuantity] = useState(1)
+    const quantity = useSelector(state => state.productCart.quantityCount)
+    const user = useSelector(state => state.userAuth.user)
+    const dispatch = useDispatch();
     useEffect(() => {
         const getProduct = async () => {
             try {
@@ -25,33 +31,32 @@ const ProductDetail = () => {
             }
         }
         getProduct()
-        // console.log(product);
     }, [id])
     return (
-        <section className='container pb-5 '>
+        <section className='container pb-5'>
             <div className='py-5 grid md:grid-cols-2 gap-10 '>
                 <div className='grid grid-cols-12 gap-5'>
-                    <div className="grid gap-5 -mx-2 mb-4 col-span-4">
+                    <div className="grid gap-5 -mx-2 mb-4 col-span-4" style={{ maxHeight: "200px" }}> {/* Adjust the height as needed */}
                         {/* Thumbnails or selectors for images */}
                         {product?.images.map((_, index) => (
                             <div key={index} className="flex-1 px-2">
                                 <button
                                     onClick={() => setSelectedImageIndex(index)}
-                                    className={`focus:outline-none w-full rounded-lg h-24 bg-gray-100 flex items-center justify-center ${selectedImageIndex === index ? "ring-2 ring-indigo-300 ring-inset" : ""
-                                        }`}
+                                    className={`focus:outline-none w-full rounded-lg h-24 bg-gray-100 flex items-center justify-center ${selectedImageIndex === index ? "ring-2 ring-indigo-300 ring-inset" : ""}`}
                                 >
                                     <img src={product.images[index].url} alt={`Thumbnail ${index + 1}`} className="w-full h-full rounded-lg" />
                                 </button>
                             </div>
                         ))}
                     </div>
-                    <div className="md:mx-0 mx-auto rounded-lg bg-gray-100 mb-4 col-span-8">
+                    <div className="md:mx-0 mx-auto rounded-lg mb-4 col-span-8 md:max-h-[35rem] min-h-[35rem]"> {/* Adjust the height as needed */}
                         {/* Show selected image */}
                         {product?.images && (
-                            <img src={product.images[selectedImageIndex].url} alt={`Product Image ${selectedImageIndex + 1}`} className="w-full h-full rounded-lg" />
+                            <img src={product.images[selectedImageIndex].url} alt={`Product Image ${selectedImageIndex + 1}`} className="w-full h-[35rem] rounded-lg" />
                         )}
                     </div>
                 </div>
+
                 <div>
                     <div className='border-b pb-3'>
                         <h1 className='text-4xl font-bold'>{product?.name}</h1>
@@ -76,13 +81,16 @@ const ProductDetail = () => {
                     </div>
                     <div className='flex justify-between pb-4 w-[24rem]'>
                         <div className="join">
-                            <button className="join-item btn" onClick={() => setQuantity(pre => quantity > 0 ? --pre : 0)}>-</button>
+                            <button className="join-item btn" onClick={() => dispatch(quantityDec())}>-</button>
                             <button className="join-item btn">{quantity}</button>
-                            <button className="join-item btn" onClick={() => setQuantity(pre => ++pre)}>+</button>
+                            <button className="join-item btn" onClick={() => dispatch(quantityInc())}>+</button>
                         </div>
-                        <button className='btn btn-primary'>Add to Cart <span className="material-symbols-outlined">
-                            shopping_cart
-                        </span>
+                        <button className='btn btn-primary' onClick={() => {
+                            const orderItems = [{ product: product._id, quantity: quantity }]
+                            dispatch(postCart(orderItems));
+                        }}>Add to Cart <span className="material-symbols-outlined">
+                                shopping_cart
+                            </span>
                         </button>
                         <button className='btn' onClick={() => setIsClicked(pre => !pre)}>
                             <span className={`material-symbols-outlined ${isClicked ? 'text-red-600' : ""} transition-colors `}>
@@ -143,16 +151,16 @@ const ProductDetail = () => {
                             <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={product?.seller?.image?.avatar} alt="Bonnie image" />
                             <h5 className="mb-1 text-xl font-medium">{product?.seller?.fullName}</h5>
                             <div className='flex gap-5 py-2'>
-                            <Link to={`mailto:${product?.seller?.email}`}>
-                                <span className="material-symbols-outlined">
-                                    mail
-                                </span>
-                            </Link>
-                            <Link to={`tel:${product?.seller?.phone}`}>
-                                <span className="material-symbols-outlined">
-                                    call
-                                </span>
-                            </Link>
+                                <Link to={`mailto:${product?.seller?.email}`}>
+                                    <span className="material-symbols-outlined">
+                                        mail
+                                    </span>
+                                </Link>
+                                <Link to={`tel:${product?.seller?.phone}`}>
+                                    <span className="material-symbols-outlined">
+                                        call
+                                    </span>
+                                </Link>
                             </div>
                             <p>Joined in: {product?.seller?.createdAt.slice(0, 10)}</p>
                         </div>

@@ -1,24 +1,24 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+// tailwind.config.js
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     container: {
+      center: true,
       padding: {
-        DEFAULT: '1rem',
+        DEFAULT: '1rem', // Default padding for containers
         sm: '1rem',
-        lg: '4rem',
-        xl: '5rem',
-        '2xl': '6rem',
+        lg: '0.8rem',
+        xl: '0.8rem',
       },
-      screens: {
-        sm: '100%',    // Small screens (up to 640px wide)
-        md: '100%',    // Medium screens (up to 768px wide)
-        lg: '100%',  // Large screens (up to 1024px wide)
-        xl: '100%',  // Extra large screens (up to 1280px wide)
-      },
+    },
+    screens: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
     },
     extend: {},
   },
@@ -26,5 +26,4 @@ export default {
   daisyui: {
     themes: ["light", "dark"],
   },
-}
-
+};

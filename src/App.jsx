@@ -1,16 +1,37 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AddProducts, Category, Dashboard, EditProduct, EditUser, Faq, Home, Login, NotFount, Product, ProductPreview, Products, Register, Seller, Users } from './pages'
 import ProductedRouter from './utils/ProductedRouter';
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import EditProductImg from './pages/admin/EditProductImg';
 import Banner from './pages/admin/Banner';
+import Cart from './pages/Cart';
+import instance from './axios';
+import { addCarts } from './redux/features/product/cartReducer';
 
 function App() {
-  const isAuthenticated = useSelector(state => state.userAuth.isAuthenticated)
+  const isAuthenticated = useSelector(state => state.userAuth.user)
   const role = useSelector(state => state.userAuth?.user?.role)
   console.log('isAuthenticated--------> ', role);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      const fetchOrderItems = async (req, res) => {
+          try {
+              const res = await instance.get('/api/v1/cart/lists', { withCredentials: true });
+              if (res.data.success) {
+                  dispatch(addCarts(res.data.cartItems.orderItems));
+              }
+          } catch (error) {
+              console.log(error.response.data.message);
+          }
+      }
+      if(isAuthenticated) {
+        fetchOrderItems();
+      }
+
+  }, [])
   return (
     <BrowserRouter>
       <Routes>
@@ -117,6 +138,14 @@ function App() {
           element={
             <ProductedRouter isAuthenticated={isAuthenticated} role={role}>
               <Banner />
+            </ProductedRouter>
+          }
+        />
+        <Route
+          path='/cart'
+          element={
+            <ProductedRouter isAuthenticated={isAuthenticated} role={role}>
+              <Cart />
             </ProductedRouter>
           }
         />
